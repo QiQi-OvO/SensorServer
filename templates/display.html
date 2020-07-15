@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据展示</title>
+    <script src = "/static/echarts.min.js"></script>
+</head>
+<body>
+<h1>温度光照磁强折线图</h1>
+<div id = "pyecharts_line" style="width :600px;height :400px;"></div>
+<script type="text/javascript">
+    var myLineChart = echarts.init(document.getElementById('pyecharts_line'));
+    var option = {{ line_options|safe }};
+    myLineChart.setOption(option)
+</script>
+
+<ul>
+    {% for k,v in data_dict.items() %}
+        <li>
+        日期
+        {{ v.date }}
+            时间
+        {{ v.time }}
+        <a href="/detail?uid={{ k }}">报告{{ k }}号情况</a>
+        </li>
+    {% endfor %}
+</ul>
+</body>
+</html>
